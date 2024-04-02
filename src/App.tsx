@@ -9,8 +9,11 @@ function App() {
           Secret meeting of the <span> Masons</span>
         </h1>
         <div className={styles.block}>
-          <Clock time = {'20:06'} />
-          <Clock time = {'07:46'} />
+          <Clock time = {new Date()} />
+          {/* {function Clock({
+            time: new Date
+          })} */}
+          {/* <Clock time = {new Date()} /> */}
         </div>
       </div>
     </>

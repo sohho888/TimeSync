@@ -1,12 +1,25 @@
-import { useState, useEffect } from 'react';
-import styles from './Clock.module.scss';
-import { canvasJS } from 'canvasjs';
+
+// let h = document.querySelector('#hour');
+// let m = document.querySelector('#min');
+// let s = document.querySelector('#sec');
+
+// setInterval(clock, 1000);
+
+// function clock() {
+//   let d = new Date();
+//   let hh = d.getHours() * 30;
+//   let mm = d.getMinutes() * 6;
+//   let ss = d.getSeconds() * 6;
+
+//   h.style.transform = `rotate(${hh}deg)`;
+//   m.style.transform = `rotate(${mm}deg)`;
+//   s.style.transform = `rotate(${ss}deg)`;
+// }
 
 
-//Создание циферблата
 
 function displayCanvas() {
-  let canvas: canvasJS = document.getElementById('myCanvas');
+  let canvas = document.getElementById('myCanvas');
   let ctx = canvas.getContext('2d');
 
   //Расчет координат центра и радиуса часов
@@ -121,62 +134,6 @@ function displayCanvas() {
   return;
 }
 
-interface ClockProps {
-  time: Date;
-}
-
-enum ClockHand {
-  hh,
-  mm,
-  ss,
-}
-
-const getDegreeByDate = (time: Date, hande: ClockHand): number => {
-  if (hande === ClockHand.hh) {
-    return time.getHours() * 30;
-  }
-  if (hande === ClockHand.mm) {
-    return time.getMinutes() * 6;
-  }
-  if (hande === ClockHand.ss) {
-    return time.getSeconds() * 6;
-  }
-  return 0;
-};
-
-export default function Clock(props: ClockProps) {
-  const [time, setTime] = useState(props.time);
-
-  useEffect(() => {
-    setTimeout(() => {
-      document.title = `You clicked ${time} times`;
-      setTime((t) => {
-        // displayCanvas();
-        let t2 = t.setSeconds(t.getSeconds() + 1);
-        return new Date(t2);
-      });
-    }, 1000);
-  }, [time]);
-
-  return (
-    <>
-      <div className={styles.clockwrapper}>
-        <div className={styles.clock}>
-          <div
-            style={{ transform: `rotate(${getDegreeByDate(time, ClockHand.hh)}deg)` }}
-            className={styles.hour}
-          ></div>
-          <div
-            style={{ transform: `rotate(${getDegreeByDate(time, ClockHand.mm)}deg)` }}
-            className={styles.min}
-          ></div>
-          <div
-            style={{ transform: `rotate(${getDegreeByDate(time, ClockHand.ss)}deg)` }}
-            className={styles.sec}
-          ></div>
-        </div>
-        {/* <div className={styles.time}>{props.time}</div> */}
-      </div>
-    </>
-  );
-}
+  window.setInterval(() =>{
+    displayCanvas();
+  }, 1000);
