@@ -14,14 +14,14 @@
   margin: 35px;
   width: 300px;
   height: 300px;
-  background: url(../assets/img/clock.png) center/cover;
+  // background: url(../assets/img/clock.png) center/cover;
 
   &::before {
     content: '';
     width: 14px;
     height: 14px;
     position: absolute;
-    background: #302e2e;
+    background: #f57474;
     border-radius: 30%;
     z-index: 10;
     top: calc(50% - 7px);
@@ -79,6 +79,39 @@
       height: 150px;
       background-color: #ff6464;
       border-radius: 4px 4px 0 0;
+    }
+  }
+
+  .face {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 1px solid rgb(255, 72, 0);
+    border-radius: 50%;
+
+    .mark {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      color: #181717;
+      .body {
+        position: absolute;
+        background-color: #181717;
+        transform: translate(-50%);
+      }
+      .minute-body {
+        width: 3px;
+        top: 0px;
+        bottom: 97%;
+      }
+      .hour-body {
+        width: 8px;
+        top: 0px;
+        bottom: 90%;
+      }
     }
   }
 }
