@@ -186,18 +186,14 @@ function ClockFace() {
     <div className={styles.face}>
       {Array.from({ length: 60 }).map((_, index) => {
         return (
-          <div
-            key={index}
-            className={styles.mark}
-            style={{ transform: `rotate(${index * 6}}deg)` }}
-          >
+          <div key={index} className={styles.mark} style={{ transform: `rotate(${index * 6}deg)` }}>
             <div className={`${styles.body} ${styles.minuteBody}`}></div>
           </div>
         );
       })}
       {Array.from({ length: 12 }).map((_, index) => {
         return (
-          <div className={styles.mark} style={{ transform: `rotate(${index * 30}}deg)` }}>
+          <div className={styles.mark} style={{ transform: `rotate(${index * 30}deg)` }}>
             <div className={`${styles.body} ${styles.hourBody}`}></div>
           </div>
         );
