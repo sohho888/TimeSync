@@ -138,6 +138,7 @@ const getDegreeByDate = (time: Date, hande: ClockHand): number => {
     return time.getMinutes() * 6;
   }
   if (hande === ClockHand.ss) {
+    console.log(time.getSeconds());
     return time.getSeconds() * 6;
   }
   return 0;
@@ -149,9 +150,11 @@ export default function Clock(props: ClockProps) {
   useEffect(() => {
     setTimeout(() => {
       document.title = `You clicked ${time} times`;
+
       setTime((t) => {
         // displayCanvas();
         let t2 = t.setSeconds(t.getSeconds() + 1);
+        console.log(t2);
         return new Date(t2);
       });
     }, 1000);
