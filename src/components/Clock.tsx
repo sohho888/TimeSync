@@ -132,13 +132,12 @@ enum ClockHand {
 
 const getDegreeByDate = (time: Date, hande: ClockHand): number => {
   if (hande === ClockHand.hh) {
-    return time.getHours() * 30;
+    return 30 * (time.getHours() + (1 / 60) * time.getMinutes());
   }
   if (hande === ClockHand.mm) {
-    return time.getMinutes() * 6;
+    return 6 * (time.getMinutes() + (1 / 60) * time.getSeconds());
   }
   if (hande === ClockHand.ss) {
-    console.log(time.getSeconds());
     return time.getSeconds() * 6;
   }
   return 0;
@@ -154,7 +153,6 @@ export default function Clock(props: ClockProps) {
       setTime((t) => {
         // displayCanvas();
         let t2 = t.setSeconds(t.getSeconds() + 1);
-        console.log(t2);
         return new Date(t2);
       });
     }, 1000);
