@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styles from './Clock.module.scss';
+import { Timeinfo } from '../Timeinfo/Timeinfo';
 // import { canvasJS } from 'canvasjs';
 
 //Создание циферблата
@@ -175,7 +176,7 @@ export default function Clock(props: ClockProps) {
             className={styles.sec}
           ></div>
         </div>
-        {/* <div className={styles.time}>{props.time}</div> */}
+        <Timeinfo />
       </div>
     </>
   );

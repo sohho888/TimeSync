@@ -1,0 +1,36 @@
+.information_wrap {
+    margin: 0 auto;
+    max-width: 300px;
+    padding: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  
+  .clock_info,
+  .location_info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .clock_info::after {
+    content: ' ';
+    margin: 10px 0;
+    width: 75%;
+    height: 2px;
+    background-color: #e9750f;
+  }
+  
+  .time_info,
+  .city_info {
+    text-align: center;
+    font-size: 22px;
+    /* padding-bottom: 5px; */
+  }
+  
+  .time_description,
+  .date_info {
+    font-size: 18px;
+  }
+  
