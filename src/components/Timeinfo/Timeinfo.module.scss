@@ -5,6 +5,33 @@
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+.clock_info {
+  &::after {
+    content: ' ';
+    margin: 10px 0;
+    width: 75%;
+    height: 2px;
+    background-color: #e9750f;
+  }
+  .time_info {
+    color: #232324;
+    font-size: 18px;
+  }
+  .time_description {
+    color: #2b2d50;
+    font-size: 18px;
+  }
+}
+
+.location_info {
+  .city_info {
+    color: #646cff;
+  }
+  .date_info {
+    font-size: 18px;
+  }
+}
+
 .clock_info,
 .location_info {
   width: 100%;
@@ -14,22 +41,10 @@
   align-items: center;
 }
 
-.clock_info::after {
-  content: ' ';
-  margin: 10px 0;
-  width: 75%;
-  height: 2px;
-  background-color: #e9750f;
-}
-
 .time_info,
 .city_info {
   text-align: center;
   font-size: 22px;
-  /* padding-bottom: 5px; */
-}
-
-.time_description,
-.date_info {
-  font-size: 18px;
+  font-weight: bold;
+  color: #646cff;
 }

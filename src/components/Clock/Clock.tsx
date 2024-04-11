@@ -56,7 +56,7 @@ export default function Clock(props: ClockProps) {
             className={styles.sec}
           ></div>
         </div>
-        <Timeinfo />
+        <Timeinfo time={new Date()} />
       </div>
     </>
   );
