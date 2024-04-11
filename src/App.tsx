@@ -10,6 +10,7 @@ function App() {
         </h1>
         <div className={styles.block}>
           <Clock time={new Date()} />
+          <Clock time={new Date()} />
         </div>
       </div>
     </>
