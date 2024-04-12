@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import styles from './Clock.module.scss';
 import Timeinfo from '../Timeinfo/Timeinfo';
+import moment from 'moment';
+import 'moment-timezone';
 
 interface ClockProps {
   time: Date;
@@ -82,3 +84,31 @@ function ClockFace() {
     </div>
   );
 }
+
+const url = 'https://timesync.club/?ts=1712745573031&tz=Asia/Tokyo';
+const dataParams = new URL(url);
+const timestamp = dataParams.searchParams.get('ts');
+const timezone = dataParams.searchParams.get('tz');
+// console.log(keyVal);
+
+// const obj: Object = {};
+
+// const dataUrl = (keyVal) => {
+//   for (const [key, value] of keyVal) {
+//     // console.log(key, value);
+//     obj[key] = value;
+//   }
+//   return obj;
+// };
+
+// const objUrl = dataUrl();
+
+let time = moment(Number(timestamp));
+console.log(time.format());
+//@ts-ignore
+console.log(time.tz(timezone).format());
+console.log('ff');
+
+
+
+
