@@ -10,13 +10,13 @@ export default function Timeinfo(props: INewDate) {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setTime(new Date());
+      setTime(time);
     }, 1000);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  }, [time]);
 
   function formatTime() {
     let hours = time.getHours();
@@ -27,20 +27,29 @@ export default function Timeinfo(props: INewDate) {
     return `${padZero(hours)} : ${padZero(minutes)}: ${padZero(seconds)} ${meridiem}`;
   }
 
-  function padZero(number:any){
-    return (number < 10 ? "0" : " ") + number;
+  function padZero(number: any) {
+    return (number < 10 ? '0' : ' ') + number;
+  }
+
+  function getUrl(url: string): any {
+    const dataParams = new URL(url);
+    const timezone = dataParams.searchParams.get('tz');
+
+    return timezone;
   }
 
   return (
     <>
       <div className={styles.information_wrap}>
         <div className={styles.clock_info}>
-          <div className={styles.time_info}>{formatTime()}</div>
+          <div className={styles.time_info}> {formatTime()}</div>
           <div className={styles.time_description}>Organizers local time</div>
         </div>
         <div className={styles.location_info}>
-          <div className={styles.city_info}>LONDON</div>
-          <div className={styles.date_info}>26/03/2024</div>
+          <div className={styles.city_info}>
+            {getUrl('https://timesync.club/?ts=1712745573031&tz=Asia/Tokyo')}
+          </div>
+          <div className={styles.date_info}>26/03/2024 </div>
         </div>
       </div>
     </>
