@@ -1,4 +1,3 @@
-
 // let h = document.querySelector('#hour');
 // let m = document.querySelector('#min');
 // let s = document.querySelector('#sec');
@@ -15,8 +14,6 @@
 //   m.style.transform = `rotate(${mm}deg)`;
 //   s.style.transform = `rotate(${ss}deg)`;
 // }
-
-
 
 function displayCanvas() {
   let canvas = document.getElementById('myCanvas');
@@ -134,6 +131,15 @@ function displayCanvas() {
   return;
 }
 
-  window.setInterval(() =>{
-    displayCanvas();
-  }, 1000);
+window.setInterval(() => {
+  displayCanvas();
+}, 1000);
+
+/////////////
+const getClientUrl = () => {
+  const urlCurrent = window.location.href;
+  const clientTtimeStamp = new Date().getTime();
+  const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const urlClient = `${urlCurrent}/?ts=${clientTtimeStamp}&tz=${clientTimeZone}`;
+  return urlClient;
+};
