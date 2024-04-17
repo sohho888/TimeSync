@@ -6,7 +6,6 @@ import 'moment-timezone';
 interface INewDate {
   time: Date;
 }
-
 export default function Timeinfo(props: INewDate) {
   const [time, setTime] = useState(props.time);
 
