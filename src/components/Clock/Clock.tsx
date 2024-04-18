@@ -4,6 +4,8 @@ import Timeinfo from '../Timeinfo/Timeinfo';
 
 interface ClockProps {
   time: Date;
+  tz: string;
+  difftime: string;
 }
 
 enum ClockHand {
@@ -27,6 +29,8 @@ const getDegreeByDate = (time: Date, hande: ClockHand): number => {
 
 export default function Clock(props: ClockProps) {
   const [time, setTime] = useState(props.time);
+  const [tz] = useState(props.tz);
+  const [difftime] = useState(props.difftime);
 
   useEffect(() => {
     setTimeout(() => {
@@ -56,7 +60,7 @@ export default function Clock(props: ClockProps) {
             className={styles.sec}
           ></div>
         </div>
-        <Timeinfo time={time} />
+        <Timeinfo time={time} tz={tz} difftime={difftime} />
       </div>
     </>
   );

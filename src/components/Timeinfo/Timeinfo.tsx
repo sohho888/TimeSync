@@ -1,35 +1,31 @@
 import styles from './Timeinfo.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import moment from 'moment';
 import 'moment-timezone';
 
 interface INewDate {
   time: Date;
+  tz: string;
+  difftime: string;
 }
 export default function Timeinfo(props: INewDate) {
-  const [time, setTime] = useState(props.time);
-
-  const today = moment(time).format('dddd, MMMM Do YYYY, h:mm:ss a');
-
-  useEffect(() => {
-    setTimeout(() => {
-      setTime((t) => {
-        let t2 = t.setSeconds(t.getSeconds() + 1);
-        return new Date(t2);
-      });
-    }, 1000);
-  }, [time]);
+  const [time] = useState(props.time);
+  const [tz] = useState(props.tz);
+  const [difftime] = useState(props.difftime);
 
   return (
     <>
       <div className={styles.information_wrap}>
         <div className={styles.clock_info}>
-          <div className={styles.time_info}> {today}</div>
-          <div className={styles.time_description}>Organizers local time</div>
+          <div className={styles.time_info}>
+            {' '}
+            {moment(time).tz(tz).format('dddd, MMMM Do YYYY, h:mm:ss a')}
+          </div>
+          <div className={styles.time_description}>{difftime} local time</div>
         </div>
         <div className={styles.location_info}>
-          <div className={styles.city_info}>London</div>
-          <div className={styles.date_info}>26/03/2024 </div>
+          <div className={styles.city_info}>{tz}</div>
+          <div className={styles.date_info}>{moment(time).format('DD/MM/YYYY')}</div>
         </div>
       </div>
     </>
