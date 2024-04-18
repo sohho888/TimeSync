@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import styles from './Clock.module.scss';
 import Timeinfo from '../Timeinfo/Timeinfo';
+import moment from 'moment';
+import 'moment-timezone';
 
 interface ClockProps {
   time: Date;
@@ -14,33 +16,23 @@ enum ClockHand {
   ss,
 }
 
-const getDegreeByDate = (time: Date, hande: ClockHand): number => {
+const getDegreeByDate = (m: any, hande: ClockHand): number => {
   if (hande === ClockHand.hh) {
-    return time.getHours() * 30;
+    return m.hours() * 30;
   }
   if (hande === ClockHand.mm) {
-    return time.getMinutes() * 6;
+    return m.minute() * 6;
   }
   if (hande === ClockHand.ss) {
-    return time.getSeconds() * 6;
+    return m.second() * 6;
   }
   return 0;
 };
 
 export default function Clock(props: ClockProps) {
-  const [time, setTime] = useState(props.time);
+  const [time] = useState(props.time);
   const [tz] = useState(props.tz);
   const [difftime] = useState(props.difftime);
-
-  useEffect(() => {
-    setTimeout(() => {
-      document.title = `You clicked ${time} times`;
-      setTime((t) => {
-        let t2 = t.setSeconds(t.getSeconds() + 1);
-        return new Date(t2);
-      });
-    }, 1000);
-  }, [time]);
 
   return (
     <>
@@ -48,15 +40,15 @@ export default function Clock(props: ClockProps) {
         <div className={styles.clock}>
           <ClockFace />
           <div
-            style={{ transform: `rotate(${getDegreeByDate(time, ClockHand.hh)}deg)` }}
+            style={{ transform: `rotate(${getDegreeByDate(moment(time), ClockHand.hh)}deg)` }}
             className={styles.hour}
           ></div>
           <div
-            style={{ transform: `rotate(${getDegreeByDate(time, ClockHand.mm)}deg)` }}
+            style={{ transform: `rotate(${getDegreeByDate(moment(time), ClockHand.mm)}deg)` }}
             className={styles.min}
           ></div>
           <div
-            style={{ transform: `rotate(${getDegreeByDate(time, ClockHand.ss)}deg)` }}
+            style={{ transform: `rotate(${getDegreeByDate(moment(time), ClockHand.ss)}deg)` }}
             className={styles.sec}
           ></div>
         </div>
