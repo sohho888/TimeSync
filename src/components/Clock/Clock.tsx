@@ -40,15 +40,15 @@ export default function Clock(props: ClockProps) {
         <div className={styles.clock}>
           <ClockFace />
           <div
-            style={{ transform: `rotate(${getDegreeByDate(moment(time), ClockHand.hh)}deg)` }}
+            style={{ transform: `rotate(${getDegreeByDate(moment(time).tz(tz), ClockHand.hh)}deg)` }}
             className={styles.hour}
           ></div>
           <div
-            style={{ transform: `rotate(${getDegreeByDate(moment(time), ClockHand.mm)}deg)` }}
+            style={{ transform: `rotate(${getDegreeByDate(moment(time).tz(tz), ClockHand.mm)}deg)` }}
             className={styles.min}
           ></div>
           <div
-            style={{ transform: `rotate(${getDegreeByDate(moment(time), ClockHand.ss)}deg)` }}
+            style={{ transform: `rotate(${getDegreeByDate(moment(time).tz(tz), ClockHand.ss)}deg)` }}
             className={styles.sec}
           ></div>
         </div>
