@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
 import styles from './Clock.module.scss';
 import Timeinfo from '../Timeinfo/Timeinfo';
-import moment from 'moment';
+import { Moment } from 'moment';
 import 'moment-timezone';
 
 interface ClockProps {
-  time: Date;
+  time: Moment;
   tz: string;
   difftime: string;
 }
@@ -16,7 +15,7 @@ enum ClockHand {
   ss,
 }
 
-const getDegreeByDate = (m: any, hande: ClockHand): number => {
+const getDegreeByDate = (m: Moment, hande: ClockHand): number => {
   if (hande === ClockHand.hh) {
     return m.hours() * 30;
   }
@@ -30,29 +29,31 @@ const getDegreeByDate = (m: any, hande: ClockHand): number => {
 };
 
 export default function Clock(props: ClockProps) {
-  const [time] = useState(props.time);
-  const [tz] = useState(props.tz);
-  const [difftime] = useState(props.difftime);
-
   return (
     <>
       <div className={styles.clockwrapper}>
         <div className={styles.clock}>
           <ClockFace />
           <div
-            style={{ transform: `rotate(${getDegreeByDate(moment(time).tz(tz), ClockHand.hh)}deg)` }}
+            style={{
+              transform: `rotate(${getDegreeByDate(props.time.tz(props.tz), ClockHand.hh)}deg)`,
+            }}
             className={styles.hour}
           ></div>
           <div
-            style={{ transform: `rotate(${getDegreeByDate(moment(time).tz(tz), ClockHand.mm)}deg)` }}
+            style={{
+              transform: `rotate(${getDegreeByDate(props.time.tz(props.tz), ClockHand.mm)}deg)`,
+            }}
             className={styles.min}
           ></div>
           <div
-            style={{ transform: `rotate(${getDegreeByDate(moment(time).tz(tz), ClockHand.ss)}deg)` }}
+            style={{
+              transform: `rotate(${getDegreeByDate(props.time.tz(props.tz), ClockHand.ss)}deg)`,
+            }}
             className={styles.sec}
           ></div>
         </div>
-        <Timeinfo time={time} tz={tz} difftime={difftime} />
+        <Timeinfo time={props.time} tz={props.tz} difftime={props.difftime} />
       </div>
     </>
   );

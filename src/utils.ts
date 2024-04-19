@@ -1,9 +1,15 @@
 // const url = 'https://timesync.club/?ts=1712745573031&tz=Asia/Tokyo';
 
+import moment from 'moment';
+
 export function parseUrl(url: string) {
-  return { date: new Date(), timezone: 'Europe/Lisbon' };
+  const urlEvent = new URL(url);
+  const timezone = urlEvent.searchParams.get('tz')!;
+  const timestamp = urlEvent.searchParams.get('ts')!;
+
+  return { date: moment(Number(timestamp)), timezone };
 }
 
 export function getCurrentTimezone(): string {
-  return 'Asia/Tokyo';
+  return Intl.DateTimeFormat().resolvedOptions().timeZone;
 }
