@@ -71,7 +71,11 @@ function ClockFace() {
       })}
       {Array.from({ length: 12 }).map((_, index) => {
         return (
-          <div className={styles.mark} style={{ transform: `rotate(${index * 30}deg)` }}>
+          <div
+            key={index}
+            className={styles.mark}
+            style={{ transform: `rotate(${index * 30}deg)` }}
+          >
             <div className={`${styles.body} ${styles.hourBody}`}></div>
           </div>
         );
