@@ -47,8 +47,9 @@ export default function Clock(props: ClockProps) {
         {modalOpen && (
           <Modal
             onSave={handleButtonClick}
-            onCansel={handleButtonClick}
+            onCanсel={handleButtonClick}
             onClose={handleButtonClick}
+            h3 = {'City to use as your default'}
           />
         )}
         <div className={styles.clock}>
