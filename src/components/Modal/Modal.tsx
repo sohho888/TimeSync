@@ -1,4 +1,5 @@
 import styles from './Modal.module.scss';
+import { PropsWithChildren } from 'react';
 
 interface ModalProps {
   h3: string;
@@ -7,30 +8,37 @@ interface ModalProps {
   onSave: () => void;
 }
 
-export default function Modal(props: ModalProps) {
+export default function Modal(props: PropsWithChildren<ModalProps>) {
   return (
     <>
-      <div className={styles.modalcontainer}>
-        <div className={styles.modal}>
+      <div
+        className={styles.modalcontainer}
+        onClick={(e) => {
+          if (e.currentTarget.className === styles.modalcontainer) {
+            e.stopPropagation();
+            props.onClose();
+          }
+        }}
+      >
+        <div
+          className={styles.modal}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
           <div className={styles.modalheader}>
             <h3>{props.h3}</h3>
             <p className={styles.close} onClick={() => props.onClose()}>
               &times;
             </p>
           </div>
-          <div className={styles.modalcontent}>
-            <input type="text" id="nearbycity" name="nearbycity" />
-            <label htmlFor="nearbycity">City to use as your default</label>
-            <p className={styles.nearbycity}>
-              <strong>Nearby: </strong>Lisboa | Madrid | Porto | Valensia
-            </p>
-          </div>
+          <div className={styles.modalcontent}>{props.children}</div>
           <div className={styles.modalfooter}>
             <button
               className={`${styles.btn} ${styles.btncancel}`}
               onClick={() => props.onCanсel()}
             >
-              Cansel
+              Cancel
             </button>
             <button className={`${styles.btn} ${styles.btnsave}`} onClick={() => props.onSave()}>
               Save

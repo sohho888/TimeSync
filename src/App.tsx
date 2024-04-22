@@ -1,7 +1,6 @@
 import Clock from './components/Clock/Clock';
 import styles from './App.module.scss';
 import { parseUrl, getCurrentTimezone } from './utils';
-
 function App() {
   const { date, timezone } = parseUrl(window.location.href);
 

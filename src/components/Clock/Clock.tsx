@@ -49,8 +49,14 @@ export default function Clock(props: ClockProps) {
             onSave={handleButtonClick}
             onCanсel={handleButtonClick}
             onClose={handleButtonClick}
-            h3 = {'City to use as your default'}
-          />
+            h3={'City to use as your default'}
+          >
+            <input type="text" id="nearbycity" name="nearbycity" />
+            <label htmlFor="nearbycity">City to use as your default</label>
+            <p className={styles.nearbycity}>
+              <strong>Nearby: </strong>Lisboa | Madrid | Porto | Valensia
+            </p>
+          </Modal>
         )}
         <div className={styles.clock}>
           <ClockFace />
