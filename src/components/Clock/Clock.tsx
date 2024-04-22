@@ -2,11 +2,14 @@ import styles from './Clock.module.scss';
 import Timeinfo from '../Timeinfo/Timeinfo';
 import { Moment } from 'moment';
 import 'moment-timezone';
+import Modal from '../Modal/Modal';
+import { useState } from 'react';
 
 interface ClockProps {
   time: Moment;
   tz: string;
   difftime: string;
+  nameevent: string;
 }
 
 enum ClockHand {
@@ -29,9 +32,25 @@ const getDegreeByDate = (m: Moment, hande: ClockHand): number => {
 };
 
 export default function Clock(props: ClockProps) {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleButtonClick = () => {
+    setModalOpen(false);
+  };
+
   return (
     <>
       <div className={styles.clockwrapper}>
+        <button className={styles.buttonclock} onClick={() => setModalOpen(true)}>
+          {props.nameevent}
+        </button>
+        {modalOpen && (
+          <Modal
+            onSave={handleButtonClick}
+            onCansel={handleButtonClick}
+            onClose={handleButtonClick}
+          />
+        )}
         <div className={styles.clock}>
           <ClockFace />
           <div

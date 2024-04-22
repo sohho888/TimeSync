@@ -3,10 +3,6 @@ import styles from './App.module.scss';
 import { parseUrl, getCurrentTimezone } from './utils';
 
 function App() {
-  // const clientUrl = 'http://localhost:5173/?ts=1618598453&tz=Europa/Moscow';
-
-  // const today = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
-
   const { date, timezone } = parseUrl(window.location.href);
 
   return (
@@ -16,8 +12,14 @@ function App() {
           Secret meeting of the <span> Masons</span>
         </h1>
         <div className={styles.block}>
-          <Clock time={date} tz={timezone} difftime={'Your'} />
-          <Clock time={date} tz={getCurrentTimezone()} difftime={'My'} />
+          <Clock time={date} tz={timezone} difftime={'Your'} nameevent={'Select Event Location'} />
+          <Clock
+            time={date}
+            tz={getCurrentTimezone()}
+            difftime={'My'}
+            nameevent={'Choose Your Location'}
+          />
+          {/* {modalOpen && <Modal />} */}
         </div>
       </div>
     </>
