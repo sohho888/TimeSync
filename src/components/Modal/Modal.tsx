@@ -15,7 +15,6 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
         className={styles.modalcontainer}
         onClick={(e) => {
           if (e.currentTarget.className === styles.modalcontainer) {
-            e.stopPropagation();
             props.onClose();
           }
         }}
