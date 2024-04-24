@@ -6,14 +6,15 @@ interface INewDate {
   time: Moment;
   tz: string;
   difftime: string;
+ 
 }
+
 export default function Timeinfo(props: INewDate) {
   return (
     <>
       <div className={styles.information_wrap}>
         <div className={styles.clock_info}>
           <div className={styles.time_info}>
-            {' '}
             {moment(props.time).tz(props.tz).format('dddd, MMMM Do YYYY, h:mm:ss a')}
           </div>
           <div className={styles.time_description}>{props.difftime} local time</div>
