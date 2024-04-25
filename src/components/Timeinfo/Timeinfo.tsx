@@ -6,7 +6,6 @@ interface INewDate {
   time: Moment;
   tz: string;
   difftime: string;
- 
 }
 
 export default function Timeinfo(props: INewDate) {

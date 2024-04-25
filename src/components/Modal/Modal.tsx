@@ -10,21 +10,17 @@ interface ModalProps {
 export default function Modal(props: PropsWithChildren<ModalProps>) {
   const [modalOpen, setModalOpen] = useState(false);
 
-  const handleButtonClick = () => {
-    setModalOpen(true);
-  };
-
   return (
     <>
-      <button className={styles.buttonclock} onClick={() => handleButtonClick()}>
+      <button className={styles.buttonclock} onClick={() => setModalOpen(true)}>
         {props.nameevent}
       </button>
 
       {modalOpen && (
         <div
           className={styles.modalcontainer}
-          onClick={(e) => {
-            if (e.currentTarget.className === styles.modalcontainer) {
+          onClick={() => {
+            {
               setModalOpen(false);
             }
           }}
