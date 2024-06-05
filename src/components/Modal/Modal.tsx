@@ -1,5 +1,7 @@
-import styles from './Modal.module.scss';
 import { PropsWithChildren, useState } from 'react';
+import FuzzySearch from '../FuzzySearch/FuzzySearch';
+import { timezones } from '../FuzzySearch/timezones';
+import styles from './Modal.module.scss';
 
 interface ModalProps {
   h3: string;
@@ -9,6 +11,12 @@ interface ModalProps {
 
 export default function Modal(props: PropsWithChildren<ModalProps>) {
   const [modalOpen, setModalOpen] = useState(false);
+  const [selectedTimezone, setSelectedTimezone] = useState<string>('');
+
+  const handleTimezoneChange = (value: string) => {
+    setSelectedTimezone(value);
+    console.log('Selected timezone:', value);
+  };
 
   return (
     <>
@@ -39,8 +47,14 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
             </div>
 
             <div className={styles.modalcontent}>
-              <input type="text" id="nearbycity" name="nearbycity" />
-              <label htmlFor="nearbycity">City to use as your default</label>
+              <FuzzySearch options={timezones} onChange={handleTimezoneChange} />
+              {selectedTimezone && (
+                <p>
+                  <strong>Selected city to use as your default: </strong>
+                  {selectedTimezone}
+                </p>
+              )}
+
               <p className={styles.nearbycity}>
                 <strong>Nearby: </strong>Lisboa | Madrid | Porto | Valensia
               </p>

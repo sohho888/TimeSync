@@ -1,4 +1,5 @@
 import Clock from './components/Clock/Clock';
+// import FuzzySearch from './components/FuzzySearch/FuzzySearch'
 import styles from './App.module.scss';
 import { parseUrl, getCurrentTimezone } from './utils';
 import Modal from './components/Modal/Modal';
@@ -45,7 +46,6 @@ function App() {
           >
             <Clock time={date} tz={getCurrentTimezone()} />
           </Setevent>
-          {clientTimeZone}
         </div>
       </div>
     </>

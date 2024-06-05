@@ -6,6 +6,7 @@ export function parseUrl(url: string) {
   const urlEvent = new URL(url);
   const timezone = urlEvent.searchParams.get('tz')!;
   const timestamp = urlEvent.searchParams.get('ts')!;
+  console.log(timezone, timestamp);
 
   return { date: moment(Number(timestamp)), timezone };
 }
