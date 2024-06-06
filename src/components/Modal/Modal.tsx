@@ -1,20 +1,21 @@
 import { PropsWithChildren, useState } from 'react';
 import FuzzySearch from '../FuzzySearch/FuzzySearch';
-import { timezones } from '../FuzzySearch/timezones';
 import styles from './Modal.module.scss';
 
 interface ModalProps {
   h3: string;
   onSave: () => void;
   nameevent: string;
+  options: string[];
+  onChange: (value: string) => void;
+  selectedTimezone: string;
 }
 
 export default function Modal(props: PropsWithChildren<ModalProps>) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedTimezone, setSelectedTimezone] = useState<string>('');
 
   const handleTimezoneChange = (value: string) => {
-    setSelectedTimezone(value);
+    props.onChange(value);
   };
 
   return (
@@ -46,11 +47,11 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
             </div>
 
             <div className={styles.modalcontent}>
-              <FuzzySearch options={timezones} onChange={handleTimezoneChange} />
-              {selectedTimezone && (
+              <FuzzySearch options={props.options} onChange={handleTimezoneChange} />
+              {props.selectedTimezone && (
                 <p>
                   <strong>Selected city to use as your default: </strong>
-                  {selectedTimezone}
+                  {props.selectedTimezone}
                 </p>
               )}
 
