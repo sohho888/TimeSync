@@ -1,5 +1,4 @@
 import Clock from './components/Clock/Clock';
-// import FuzzySearch from './components/FuzzySearch/FuzzySearch'
 import styles from './App.module.scss';
 import { parseUrl, getCurrentTimezone } from './utils';
 import Modal from './components/Modal/Modal';
@@ -12,8 +11,6 @@ function App() {
   function handleButtonClick(): void {
     throw new Error('Function not implemented.');
   }
-
-  const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   return (
     <>

@@ -15,7 +15,6 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
 
   const handleTimezoneChange = (value: string) => {
     setSelectedTimezone(value);
-    console.log('Selected timezone:', value);
   };
 
   return (

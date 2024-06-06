@@ -11,7 +11,6 @@ const FuzzySearch = function ({ options, onChange }: FuzzySearchProps) {
   const [query, setQuery] = useState<string>('');
   const [results, setResults] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [highlightedIndex] = useState<number | null>(null);
 
   // Функция для выполнения нечеткого поиска
   const fuzzySearch = (query: string, options: string[]): string[] => {
@@ -48,9 +47,9 @@ const FuzzySearch = function ({ options, onChange }: FuzzySearchProps) {
       />
       {isOpen && (
         <ul role="listbox" className={styles.ul}>
-          {results.map((result, index) => (
+          {results.map((result) => (
             <li
-              key={index}
+              key={result}
               role="option"
               onMouseDown={() => handleSelect(result)}
               className={styles.li}
