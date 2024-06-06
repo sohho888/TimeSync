@@ -13,14 +13,14 @@ enum ClockHand {
   ss,
 }
 
-const getDegreeByDate = (m: Moment, hande: ClockHand): number => {
-  if (hande === ClockHand.hh) {
+const getDegreeByDate = (m: Moment, hand: ClockHand): number => {
+  if (hand === ClockHand.hh) {
     return m.hours() * 30;
   }
-  if (hande === ClockHand.mm) {
+  if (hand === ClockHand.mm) {
     return m.minute() * 6;
   }
-  if (hande === ClockHand.ss) {
+  if (hand === ClockHand.ss) {
     return m.second() * 6;
   }
   return 0;

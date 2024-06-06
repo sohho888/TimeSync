@@ -12,8 +12,6 @@ function App() {
     throw new Error('Function not implemented.');
   }
 
-  const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
   return (
     <>
       <div className={styles.wrapper}>
@@ -45,7 +43,6 @@ function App() {
           >
             <Clock time={date} tz={getCurrentTimezone()} />
           </Setevent>
-          {clientTimeZone}
         </div>
       </div>
     </>

@@ -36,7 +36,6 @@
     }
     .modalcontent {
       padding-top: 20px;
-
       display: flex;
       flex-direction: column;
 
@@ -57,7 +56,29 @@
       .nearbycity {
         font-size: 1rem;
       }
+
+      ul {
+        position: absolute;
+        z-index: 1;
+        list-style: none;
+        margin-top: 5px;
+        padding: 0;
+        // background: white;
+        width: 100%;
+        height: 180px;
+        overflow-y: auto;
+      }
+
+      li {
+        background: #b8bbef;
+        padding: 8px;
+        cursor: pointer;
+        &:hover {
+          background: #e5e5ec;
+        }
+      }
     }
+
     .modalfooter {
       padding-top: 2rem;
       display: flex;
