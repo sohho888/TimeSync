@@ -17,7 +17,7 @@ export default function Timeinfo(props: INewDate) {
       <div className={styles.information_wrap}>
         <div className={styles.clock_info}>
           <div className={styles.time_info}>{formattedTime}</div>
-          <div className={styles.time_description}>{props.difftime} local time</div>
+          <div className={styles.time_description}>{props.difftime} time</div>
         </div>
         <div className={styles.location_info}>
           <div className={styles.city_info}>{props.tz}</div>

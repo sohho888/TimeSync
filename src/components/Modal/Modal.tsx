@@ -18,6 +18,11 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
     props.onChange(value);
   };
 
+  const handleSave = () => {
+    props.onSave();
+    setModalOpen(false);
+  };
+
   return (
     <>
       <button className={styles.buttonclock} onClick={() => setModalOpen(true)}>
@@ -25,20 +30,8 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
       </button>
 
       {modalOpen && (
-        <div
-          className={styles.modalcontainer}
-          onClick={() => {
-            {
-              setModalOpen(false);
-            }
-          }}
-        >
-          <div
-            className={styles.modal}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
+        <div className={styles.modalcontainer} onClick={() => setModalOpen(false)}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalheader}>
               <h3>{props.h3}</h3>
               <p className={styles.close} onClick={() => setModalOpen(false)}>
@@ -54,10 +47,6 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
                   {props.selectedTimezone}
                 </p>
               )}
-
-              <p className={styles.nearbycity}>
-                <strong>Nearby: </strong>Lisboa | Madrid | Porto | Valensia
-              </p>
             </div>
 
             <div className={styles.modalfooter}>
@@ -67,7 +56,7 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
               >
                 Cancel
               </button>
-              <button className={`${styles.btn} ${styles.btnsave}`} onClick={() => props.onSave()}>
+              <button className={`${styles.btn} ${styles.btnsave}`} onClick={handleSave}>
                 Save
               </button>
             </div>
