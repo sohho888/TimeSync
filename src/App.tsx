@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useState, PropsWithChildren } from 'react';
 import Clock from './components/Clock/Clock';
 import styles from './App.module.scss';
 import { parseUrl, getCurrentTimezone } from './utils';
 import Modal from './components/Modal/Modal';
 import Timeinfo from './components/Timeinfo/Timeinfo';
 import Setevent from './components/Setevent/Setevent';
-import FuzzySearch from './components/FuzzySearch/FuzzySearch';
 import { timezones } from './components/FuzzySearch/timezones';
 
-function App() {
+type AppProps = PropsWithChildren<{}>;
+
+function App({ children }: AppProps) {
   const { date, timezone } = parseUrl(window.location.href);
   const [selectedTimezone, setSelectedTimezone] = useState<string>('');
   const [savedTimezone, setSavedTimezone] = useState<string>(timezone);
@@ -43,7 +44,7 @@ function App() {
               onChange={handleTimezoneChange}
               options={timezones}
             >
-              <FuzzySearch options={timezones} onChange={handleTimezoneChange} />
+              {children}
             </Modal>
           }
         >
