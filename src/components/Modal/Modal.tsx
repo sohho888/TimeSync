@@ -40,7 +40,7 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
             </div>
 
             <div className={styles.modalcontent}>
-              <FuzzySearch options={props.options} onChange={handleTimezoneChange} />
+              {props.children}
               {props.selectedTimezone && (
                 <p>
                   <strong>Selected city to use as your default: </strong>
