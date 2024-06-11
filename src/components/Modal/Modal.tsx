@@ -1,22 +1,15 @@
 import { PropsWithChildren, useState } from 'react';
-import FuzzySearch from '../FuzzySearch/FuzzySearch';
 import styles from './Modal.module.scss';
 
 interface ModalProps {
   h3: string;
   onSave: () => void;
   nameevent: string;
-  options: string[];
-  onChange: (value: string) => void;
   selectedTimezone: string;
 }
 
 export default function Modal(props: PropsWithChildren<ModalProps>) {
   const [modalOpen, setModalOpen] = useState(false);
-
-  const handleTimezoneChange = (value: string) => {
-    props.onChange(value);
-  };
 
   const handleSave = () => {
     props.onSave();

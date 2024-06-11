@@ -40,8 +40,6 @@ function App() {
               h3="City to use as your default"
               nameevent="Is your location chosen correctly?"
               selectedTimezone={selectedTimezone}
-              onChange={handleTimezoneChange}
-              options={timezones}
             >
               {<FuzzySearch options={timezones} onChange={handleTimezoneChange} />}
             </Modal>
