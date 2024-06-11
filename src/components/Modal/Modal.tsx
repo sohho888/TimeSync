@@ -1,20 +1,19 @@
 import { PropsWithChildren, useState } from 'react';
-import FuzzySearch from '../FuzzySearch/FuzzySearch';
-import { timezones } from '../FuzzySearch/timezones';
 import styles from './Modal.module.scss';
 
 interface ModalProps {
   h3: string;
   onSave: () => void;
   nameevent: string;
+  selectedTimezone: string;
 }
 
 export default function Modal(props: PropsWithChildren<ModalProps>) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedTimezone, setSelectedTimezone] = useState<string>('');
 
-  const handleTimezoneChange = (value: string) => {
-    setSelectedTimezone(value);
+  const handleSave = () => {
+    props.onSave();
+    setModalOpen(false);
   };
 
   return (
@@ -24,20 +23,8 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
       </button>
 
       {modalOpen && (
-        <div
-          className={styles.modalcontainer}
-          onClick={() => {
-            {
-              setModalOpen(false);
-            }
-          }}
-        >
-          <div
-            className={styles.modal}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
+        <div className={styles.modalcontainer} onClick={() => setModalOpen(false)}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             <div className={styles.modalheader}>
               <h3>{props.h3}</h3>
               <p className={styles.close} onClick={() => setModalOpen(false)}>
@@ -46,17 +33,13 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
             </div>
 
             <div className={styles.modalcontent}>
-              <FuzzySearch options={timezones} onChange={handleTimezoneChange} />
-              {selectedTimezone && (
+              {props.children}
+              {props.selectedTimezone && (
                 <p>
                   <strong>Selected city to use as your default: </strong>
-                  {selectedTimezone}
+                  {props.selectedTimezone}
                 </p>
               )}
-
-              <p className={styles.nearbycity}>
-                <strong>Nearby: </strong>Lisboa | Madrid | Porto | Valensia
-              </p>
             </div>
 
             <div className={styles.modalfooter}>
@@ -66,7 +49,7 @@ export default function Modal(props: PropsWithChildren<ModalProps>) {
               >
                 Cancel
               </button>
-              <button className={`${styles.btn} ${styles.btnsave}`} onClick={() => props.onSave()}>
+              <button className={`${styles.btn} ${styles.btnsave}`} onClick={handleSave}>
                 Save
               </button>
             </div>
