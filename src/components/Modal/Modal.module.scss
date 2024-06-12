@@ -39,11 +39,10 @@
       display: flex;
       flex-direction: column;
 
-      input {
-        display: block;
-        height: 30px;
-        padding: 5px;
-        font-size: 18px;
+      .input {
+        width: 50%;
+        padding: 8px 12px;
+        font-size: 17px;
         border: 1px solid #843030;
         border-radius: 3px;
         color: #555cdb;
@@ -53,30 +52,38 @@
         }
       }
 
-      .nearbycity {
-        font-size: 1rem;
-      }
-
-      ul {
-        position: absolute;
-        z-index: 1;
-        list-style: none;
-        margin-top: 5px;
-        padding: 0;
-        // background: white;
-        width: 100%;
-        height: 180px;
-        overflow-y: auto;
-      }
-
-      li {
-        background: #b8bbef;
-        padding: 8px;
+      .dropdown {
         cursor: pointer;
-        &:hover {
-          background: #e5e5ec;
-        }
+        width: 100%;
+        background-color: white;
+        position: absolute;
+        z-index: 1000;
+        margin-top: 5px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        max-height: 200px;
+        overflow-y: auto;
+        border-radius: 2px;
       }
+    }
+
+    .option {
+      padding: 8px 12px;
+      cursor: pointer;
+      color: #333; // Цвет текста по умолчанию
+      background-color: #fff; // Фон по умолчанию
+      transition: background-color 0.2s; // Плавное изменение фона
+
+      &:hover,
+      &:focus {
+        background-color: #e2e8f0; // Светло-голубой фон для активного элемента
+        color: #1a202c; // Темно-синий текст для активного элемента
+      }
+    }
+
+    .optionSelected {
+      background-color: #555cdb;
+      color: #fff;
     }
 
     .modalfooter {

@@ -2,7 +2,6 @@ import { ChangeEvent, useState } from 'react';
 import styles from '../Modal/Modal.module.scss';
 import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react';
 
-//Определение типов для пропсов компонента
 interface FuzzySearchProps {
   options: string[];
   onChange: (value: string) => void;
@@ -11,7 +10,6 @@ interface FuzzySearchProps {
 const FuzzySearch = function ({ options, onChange }: FuzzySearchProps) {
   const [query, setQuery] = useState<string>('');
   const [results, setResults] = useState<string[]>([]);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   // Функция для выполнения нечеткого поиска
@@ -25,36 +23,32 @@ const FuzzySearch = function ({ options, onChange }: FuzzySearchProps) {
     setQuery(value);
     const searchResults = fuzzySearch(value, options);
     setResults(searchResults);
-    setIsOpen(true);
   };
-
   const handleSelect = (value: string) => {
-    setQuery(value);
-    setIsOpen(false);
-    onChange(value);
-  };
-
-  const handleBlur = () => {
-    setIsOpen(false);
+    setSelectedOption(value);
+    setQuery(value); // Обновить строку поиска до выбранного значения
+    onChange(value); // Вызвать внешний onChange
+    setResults([]); // Очистить результаты после выбора
   };
 
   return (
-    <div style={{ position: 'relative' }} onBlur={handleBlur}>
-      <Combobox value={selectedOption} onChange={setSelectedOption}>
+    <div style={{ position: 'relative' }}>
+      <Combobox value={selectedOption} onChange={handleSelect}>
         <ComboboxInput
           type="text"
           value={query}
           onChange={handleInputChange}
           placeholder="Search..."
-          onFocus={() => setIsOpen(true)}
+          className={styles.input}
         />
-        <ComboboxOptions className={styles.ul}>
+        <ComboboxOptions className={styles.dropdown}>
           {results.map((result) => (
             <ComboboxOption
               key={result}
-              onMouseDown={() => handleSelect(result)}
-              className={styles.li}
               value={result}
+              className={`${styles.option} ${
+                selectedOption === result ? styles.optionSelected : ''
+              }`}
             >
               {result}
             </ComboboxOption>
