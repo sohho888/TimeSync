@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import styles from '../Modal/Modal.module.scss';
+import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react';
 
 //Определение типов для пропсов компонента
 interface FuzzySearchProps {
@@ -11,6 +12,7 @@ const FuzzySearch = function ({ options, onChange }: FuzzySearchProps) {
   const [query, setQuery] = useState<string>('');
   const [results, setResults] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   // Функция для выполнения нечеткого поиска
   const fuzzySearch = (query: string, options: string[]): string[] => {
@@ -38,27 +40,27 @@ const FuzzySearch = function ({ options, onChange }: FuzzySearchProps) {
 
   return (
     <div style={{ position: 'relative' }} onBlur={handleBlur}>
-      <input
-        type="text"
-        value={query}
-        onChange={handleInputChange}
-        placeholder="Search..."
-        onFocus={() => setIsOpen(true)}
-      />
-      {isOpen && (
-        <ul role="listbox" className={styles.ul}>
+      <Combobox value={selectedOption} onChange={setSelectedOption}>
+        <ComboboxInput
+          type="text"
+          value={query}
+          onChange={handleInputChange}
+          placeholder="Search..."
+          onFocus={() => setIsOpen(true)}
+        />
+        <ComboboxOptions className={styles.ul}>
           {results.map((result) => (
-            <li
+            <ComboboxOption
               key={result}
-              role="option"
               onMouseDown={() => handleSelect(result)}
               className={styles.li}
+              value={result}
             >
               {result}
-            </li>
+            </ComboboxOption>
           ))}
-        </ul>
-      )}
+        </ComboboxOptions>
+      </Combobox>
     </div>
   );
 };
