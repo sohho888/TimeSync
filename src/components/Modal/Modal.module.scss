@@ -70,20 +70,19 @@
     .option {
       padding: 8px 12px;
       cursor: pointer;
-      color: #333; // Цвет текста по умолчанию
-      background-color: #fff; // Фон по умолчанию
-      transition: background-color 0.2s; // Плавное изменение фона
+      color: #333;
+      background-color: #fff;
 
-      &:hover,
-      &:focus {
-        background-color: #e2e8f0; // Светло-голубой фон для активного элемента
-        color: #1a202c; // Темно-синий текст для активного элемента
+      &[data-focus] {
+        background-color: #e2e8f0;
+        color: #1a202c;
       }
-    }
 
-    .optionSelected {
-      background-color: #555cdb;
-      color: #fff;
+      &[data-selected] {
+        // Стиль для выбранного элемента
+        background-color: #3182ce;
+        color: #fff;
+      }
     }
 
     .modalfooter {

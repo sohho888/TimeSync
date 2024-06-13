@@ -41,15 +41,9 @@ const FuzzySearch = function ({ options, onChange }: FuzzySearchProps) {
           placeholder="Search..."
           className={styles.input}
         />
-        <ComboboxOptions className={styles.dropdown}>
+        <ComboboxOptions className={styles.dropdown} data-focus="focus">
           {results.map((result) => (
-            <ComboboxOption
-              key={result}
-              value={result}
-              className={`${styles.option} ${
-                selectedOption === result ? styles.optionSelected : ''
-              }`}
-            >
+            <ComboboxOption key={result} value={result} className={styles.option}>
               {result}
             </ComboboxOption>
           ))}
