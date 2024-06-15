@@ -1,53 +1,40 @@
 import { useState } from 'react';
-import Clock from './components/Clock/Clock';
-import styles from './App.module.scss';
-import { parseUrl, getCurrentTimezone } from './utils';
-import Modal from './components/Modal/Modal';
-import Timeinfo from './components/Timeinfo/Timeinfo';
-import Setevent from './components/Setevent/Setevent';
-import FuzzySearch from './components/FuzzySearch/FuzzySearch';
-import { timezones } from './components/FuzzySearch/timezones';
+import PageEvent from './components/ PageEvent/PageEvent';
+import moment from 'moment-timezone';
 
 function App() {
-  const { date, timezone } = parseUrl(window.location.href);
-  const [selectedTimezone, setSelectedTimezone] = useState<string>('');
-  const [savedTimezone, setSavedTimezone] = useState<string>(timezone);
+  const [eventName, setEventName] = useState('');
+  const [eventDate, setEventDate] = useState('');
+  const [eventTime, setEventTime] = useState('');
+  const [generatedUrl, setGeneratedUrl] = useState('');
 
-  const handleTimezoneChange = (value: string) => {
-    setSelectedTimezone(value);
-  };
-
-  const handleSave = () => {
-    setSavedTimezone(selectedTimezone);
+  const handleGenerateUrl = () => {
+    const timestamp = moment.tz(`${eventDate} ${eventTime}`, moment.tz.guess()).valueOf();
+    const timezone = moment.tz.guess();
+    const url = `http://url/?ts=${timestamp}&tz=${timezone}&event=${encodeURIComponent(eventName)}`;
+    setGeneratedUrl(url);
   };
 
   return (
-    <div className={styles.wrapper}>
-      <h1 className={styles.h1}>
-        Secret meeting of the <span> Masons</span>
-      </h1>
-      <div className={styles.block}>
-        <Setevent
-          header={<Timeinfo time={date} tz={timezone} difftime="Event" />}
-          footer={<Clock time={date} tz={timezone} />}
-        />
-
-        <Setevent
-          header={<Timeinfo time={date} tz={savedTimezone} difftime="My" />}
-          footer={
-            <Modal
-              onSave={handleSave}
-              h3="City to use as your default"
-              nameevent="Is your location chosen correctly?"
-              selectedTimezone={selectedTimezone}
-            >
-              {<FuzzySearch options={timezones} onChange={handleTimezoneChange} />}
-            </Modal>
-          }
-        >
-          <Clock time={date} tz={getCurrentTimezone()} />
-        </Setevent>
-      </div>
+    <div>
+      <h1>Создание события</h1>
+      <input
+        type="text"
+        value={eventName}
+        onChange={(e) => setEventName(e.target.value)}
+        placeholder="Название события"
+      />
+      <input type="date" value={eventDate} onChange={(e) => setEventDate(e.target.value)} />
+      <input type="time" value={eventTime} onChange={(e) => setEventTime(e.target.value)} />
+      <button onClick={handleGenerateUrl}>Сформировать ссылку</button>
+      {generatedUrl && (
+        <div>
+          <p>
+            Ссылка на событие: <a href={generatedUrl}>{generatedUrl}</a>
+          </p>
+        </div>
+      )}
+      <PageEvent eventUrl={generatedUrl} />
     </div>
   );
 }
