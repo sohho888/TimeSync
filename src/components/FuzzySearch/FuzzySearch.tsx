@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import styles from '../Modal/Modal.module.scss';
+import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react';
 
-//Определение типов для пропсов компонента
 interface FuzzySearchProps {
   options: string[];
   onChange: (value: string) => void;
@@ -10,7 +10,7 @@ interface FuzzySearchProps {
 const FuzzySearch = function ({ options, onChange }: FuzzySearchProps) {
   const [query, setQuery] = useState<string>('');
   const [results, setResults] = useState<string[]>([]);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   // Функция для выполнения нечеткого поиска
   const fuzzySearch = (query: string, options: string[]): string[] => {
@@ -23,42 +23,32 @@ const FuzzySearch = function ({ options, onChange }: FuzzySearchProps) {
     setQuery(value);
     const searchResults = fuzzySearch(value, options);
     setResults(searchResults);
-    setIsOpen(true);
   };
-
   const handleSelect = (value: string) => {
-    setQuery(value);
-    setIsOpen(false);
-    onChange(value);
-  };
-
-  const handleBlur = () => {
-    setIsOpen(false);
+    setSelectedOption(value);
+    setQuery(value); // Обновить строку поиска до выбранного значения
+    onChange(value); // Вызвать внешний onChange
+    setResults([]); // Очистить результаты после выбора
   };
 
   return (
-    <div style={{ position: 'relative' }} onBlur={handleBlur}>
-      <input
-        type="text"
-        value={query}
-        onChange={handleInputChange}
-        placeholder="Search..."
-        onFocus={() => setIsOpen(true)}
-      />
-      {isOpen && (
-        <ul role="listbox" className={styles.ul}>
+    <div style={{ position: 'relative' }}>
+      <Combobox value={selectedOption} onChange={handleSelect}>
+        <ComboboxInput
+          type="text"
+          value={query}
+          onChange={handleInputChange}
+          placeholder="Search..."
+          className={styles.input}
+        />
+        <ComboboxOptions className={styles.dropdown} data-focus="focus">
           {results.map((result) => (
-            <li
-              key={result}
-              role="option"
-              onMouseDown={() => handleSelect(result)}
-              className={styles.li}
-            >
+            <ComboboxOption key={result} value={result} className={styles.option}>
               {result}
-            </li>
+            </ComboboxOption>
           ))}
-        </ul>
-      )}
+        </ComboboxOptions>
+      </Combobox>
     </div>
   );
 };
