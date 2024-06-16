@@ -1,6 +1,6 @@
-import { PropsWithChildren, useState } from 'react';
+import { useState, useEffect, PropsWithChildren } from 'react';
 import Clock from '../Clock/Clock';
-import styles from './App.module.scss';
+import styles from './PageEvent.module.scss';
 import { parseUrl, getCurrentTimezone } from '../../utils';
 import Modal from '../Modal/Modal';
 import Timeinfo from '../Timeinfo/Timeinfo';
@@ -13,9 +13,14 @@ interface PageEventProps {
 }
 
 function PageEvent(props: PropsWithChildren<PageEventProps>) {
-  const { date, timezone } = parseUrl(window.location.href);
-  const [selectedTimezone, setSelectedTimezone] = useState<string>('');
-  const [savedTimezone, setSavedTimezone] = useState<string>(timezone);
+  const { date, timezone, event } = parseUrl(props.eventUrl);
+
+  const decodedEventName = decodeURIComponent(event || '');
+
+  const [selectedTimezone, setSelectedTimezone] = useState<string>(
+    timezone || getCurrentTimezone(),
+  );
+  const [savedTimezone, setSavedTimezone] = useState<string>(timezone || getCurrentTimezone());
 
   const handleTimezoneChange = (value: string) => {
     setSelectedTimezone(value);
@@ -25,11 +30,15 @@ function PageEvent(props: PropsWithChildren<PageEventProps>) {
     setSavedTimezone(selectedTimezone);
   };
 
+  useEffect(() => {
+    // Обновить выбранные и сохранённые часовые пояса, если timezone изменился
+    setSelectedTimezone(timezone || getCurrentTimezone());
+    setSavedTimezone(timezone || getCurrentTimezone());
+  }, [timezone]);
+
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.h1}>
-        Secret meeting of the <span> Masons</span>
-      </h1>
+      <h1 className={styles.h1}>{decodedEventName || 'Secret meeting of the >Masons'}</h1>
       <div className={styles.block}>
         <Setevent
           header={<Timeinfo time={date} tz={timezone} difftime="Event" />}
