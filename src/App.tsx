@@ -4,11 +4,11 @@ import { parseUrl } from './utils';
 import styles from './App.module.scss';
 
 function App() {
-  const { date, timezone } = parseUrl(window.location.href);
+  const { date, timezone, event } = parseUrl(window.location.href);
 
   return (
     <div className={styles.wrapper}>
-      {date && timezone ? <PageEvent eventUrl={window.location.href} /> : <CreateEvent />}
+      {date && timezone ? <PageEvent date={date} timezone={timezone} event={event} /> : <CreateEvent />}
     </div>
   );
 }

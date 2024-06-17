@@ -11,12 +11,13 @@ h1 {
 
 .wrapper {
   width: 1280px;
-  padding: 2em;
+  padding: 1em;
 }
 
 .block {
-  margin-top: 30px;
   display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
   justify-content: space-around;
   padding: 35px;
 }

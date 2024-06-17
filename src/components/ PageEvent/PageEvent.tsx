@@ -1,20 +1,21 @@
-import { useState, useEffect, PropsWithChildren } from 'react';
+import { useState } from 'react';
 import Clock from '../Clock/Clock';
 import styles from './PageEvent.module.scss';
-import { parseUrl, getCurrentTimezone } from '../../utils';
+import { getCurrentTimezone } from '../../utils';
 import Modal from '../Modal/Modal';
 import Timeinfo from '../Timeinfo/Timeinfo';
 import Setevent from '../Setevent/Setevent';
 import FuzzySearch from '../FuzzySearch/FuzzySearch';
 import { timezones } from '../FuzzySearch/timezones';
+import { Moment } from 'moment';
 
 interface PageEventProps {
-  eventUrl: string; // Свойство для URL события
+  date: Moment;
+  timezone: string;
+  event: any;
 }
 
-function PageEvent(props: PropsWithChildren<PageEventProps>) {
-  const { date, timezone, event } = parseUrl(props.eventUrl);
-
+function PageEvent({ date, timezone, event }: PageEventProps) {
   const decodedEventName = decodeURIComponent(event || '');
 
   const [selectedTimezone, setSelectedTimezone] = useState<string>(
@@ -30,15 +31,11 @@ function PageEvent(props: PropsWithChildren<PageEventProps>) {
     setSavedTimezone(selectedTimezone);
   };
 
-  useEffect(() => {
-    // Обновить выбранные и сохранённые часовые пояса, если timezone изменился
-    setSelectedTimezone(timezone || getCurrentTimezone());
-    setSavedTimezone(timezone || getCurrentTimezone());
-  }, [timezone]);
-
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.h1}>{decodedEventName || 'Secret meeting of the >Masons'}</h1>
+      <h1 className={styles.h1}>
+        <span>Event: </span> {decodedEventName || 'Unknown event'}
+      </h1>
       <div className={styles.block}>
         <Setevent
           header={<Timeinfo time={date} tz={timezone} difftime="Event" />}

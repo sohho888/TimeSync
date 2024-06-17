@@ -11,7 +11,7 @@ function CreateEvent() {
   const handleGenerateUrl = () => {
     const timestamp = moment.tz(`${eventDate} ${eventTime}`, moment.tz.guess()).valueOf();
     const timezone = moment.tz.guess();
-    const url = `http://localhost:5174/?ts=${timestamp}&tz=${timezone}&event=${encodeURIComponent(
+    const url = `http://localhost:5173/?ts=${timestamp}&tz=${timezone}&event=${encodeURIComponent(
       eventName,
     )}`;
     setGeneratedUrl(url);
@@ -41,7 +41,6 @@ function CreateEvent() {
             type="time"
             value={eventTime}
             onChange={(e) => setEventTime(e.target.value)}
-           
           />
         </div>
         <button className={styles.submitbutton} onClick={handleGenerateUrl}>
@@ -50,7 +49,10 @@ function CreateEvent() {
         {generatedUrl && (
           <div className={styles.linkdisplay}>
             <p>
-              Ссылка на событие: <a href={generatedUrl}>{generatedUrl}</a>
+              Ссылка на событие:{' '}
+              <a href={generatedUrl} target="_blank">
+                {generatedUrl}
+              </a>
             </p>
           </div>
         )}
