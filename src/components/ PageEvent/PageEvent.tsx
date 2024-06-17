@@ -12,11 +12,11 @@ import { Moment } from 'moment';
 interface PageEventProps {
   date: Moment;
   timezone: string;
-  event: any;
+  event: string;
 }
 
 function PageEvent({ date, timezone, event }: PageEventProps) {
-  const decodedEventName = decodeURIComponent(event || '');
+  const decodedEventName = decodeURIComponent(event);
 
   const [selectedTimezone, setSelectedTimezone] = useState<string>(
     timezone || getCurrentTimezone(),
