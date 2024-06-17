@@ -3,6 +3,10 @@
   line-height: 1.5;
   font-weight: 400;
 
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -25,6 +29,7 @@ a:hover {
 body {
   margin: 0;
   display: flex;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -32,6 +37,8 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
   color: #646cff;
+
+  padding: 0;
 }
 
 button {

@@ -1,0 +1,72 @@
+/* Основные стили для контейнера */
+.formcontainer {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+
+  padding: 0px 20px 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .formheader {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4d4a4a;
+    text-align: center;
+  }
+  .inputwrapper {
+    display: flex;
+    margin-bottom: 15px;
+
+    .inputfield {
+      margin-bottom: 15px;
+      border-radius: 4px;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 17px;
+      border: 1px solid #843030;
+      border-radius: 3px;
+      color: #555cdb;
+      &:focus,
+      :focus-visible {
+        outline: 1px auto #f28c52;
+      }
+      &::placeholder {
+        color: #555cdb;
+      }
+    }
+  }
+  /* Стили для полей ввода */
+
+  /* Стили для кнопки */
+  .submitbutton {
+    margin: 0 auto;
+    width: 60%;
+    max-width: 270px;
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background-color: #646cff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .submitbutton:hover {
+    background-color: #e6671e;
+  }
+
+  /* Стили для ссылки */
+  .linkdisplay {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .linkdisplay a {
+    color: #007bff;
+    text-decoration: none;
+  }
+}
