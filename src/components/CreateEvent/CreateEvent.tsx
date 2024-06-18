@@ -7,20 +7,33 @@ function CreateEvent() {
   const [eventDate, setEventDate] = useState('');
   const [eventTime, setEventTime] = useState('00:00');
   const [generatedUrl, setGeneratedUrl] = useState('');
+  const [error, setError] = useState('');
 
   const handleGenerateUrl = () => {
-    const timestamp = moment.tz(`${eventDate} ${eventTime}`, moment.tz.guess()).valueOf();
+    if (!eventName || !eventDate || !eventTime) {
+      setError('Пожалуйста, заполните все поля.');
+      return;
+    }
+    const dateTime = moment.tz(`${eventDate} ${eventTime}`, moment.tz.guess());
+    if (!dateTime.isValid()) {
+      setError('Неверный формат даты или времени.');
+      return;
+    }
+
+    const timestamp = dateTime.valueOf();
     const timezone = moment.tz.guess();
     const url = `http://localhost:5173/?ts=${timestamp}&tz=${timezone}&event=${encodeURIComponent(
       eventName,
     )}`;
     setGeneratedUrl(url);
+    setError('');
   };
 
   return (
     <>
       <h1>Создание события</h1>
       <div className={styles.formcontainer}>
+      {error && <p className={styles.error}>{error}</p>}
         <h3 className={styles.formheader}> {eventName}</h3>
         <div className={styles.inputwrapper}>
           <input
