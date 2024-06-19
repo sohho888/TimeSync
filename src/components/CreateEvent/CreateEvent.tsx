@@ -22,9 +22,9 @@ function CreateEvent() {
 
     const timestamp = dateTime.valueOf();
     const timezone = moment.tz.guess();
-    const url = `${window.location.href} /?ts=${timestamp}&tz=${timezone}&event=${encodeURIComponent(
-      eventName,
-    )}`;
+    const url = `${
+      window.location.href
+    } /?ts=${timestamp}&tz=${timezone}&event=${encodeURIComponent(eventName)}`;
     setGeneratedUrl(url);
     setError('');
   };
@@ -33,7 +33,7 @@ function CreateEvent() {
     <>
       <h1>Создание события</h1>
       <div className={styles.formcontainer}>
-      {error && <p className={styles.error}>{error}</p>}
+        {error && <p className={styles.error}>{error}</p>}
         <h3 className={styles.formheader}> {eventName}</h3>
         <div className={styles.inputwrapper}>
           <input
