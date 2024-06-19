@@ -69,4 +69,29 @@
     color: #007bff;
     text-decoration: none;
   }
+
+  .error {
+    color: #ff0000;
+    background-color: #fff0f0;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid #ffcccc;
+    border-radius: 5px;
+    font-size: 0.9em;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .error {
+    animation: fadeIn 0.3s ease-in;
+  }
 }
