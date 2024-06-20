@@ -12,7 +12,7 @@ import { Moment } from 'moment';
 interface PageEventProps {
   date: Moment;
   timezone: string;
-  event: string;
+  event: any;
 }
 
 function PageEvent({ date, timezone, event }: PageEventProps) {

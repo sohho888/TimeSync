@@ -31,7 +31,11 @@ function CreateEvent() {
 
   return (
     <>
-      <h1>Создание события</h1>
+      <div className="header">
+        <img src="../../../public/favicon.svg" alt="" />
+        <h1>Выберите идеальное время для Вашего события с TimeZoneHop</h1>
+      </div>
+
       <div className={styles.formcontainer}>
         {error && <p className={styles.error}>{error}</p>}
         <h3 className={styles.formheader}> {eventName}</h3>
@@ -56,6 +60,7 @@ function CreateEvent() {
             onChange={(e) => setEventTime(e.target.value)}
           />
         </div>
+
         <button className={styles.submitbutton} onClick={handleGenerateUrl}>
           Сформировать ссылку
         </button>

@@ -4,7 +4,6 @@
   font-weight: 400;
 
   max-width: 1280px;
-  margin: 0 auto;
   padding: 2rem;
 
   color-scheme: light dark;
@@ -34,10 +33,10 @@ body {
   min-height: 100vh;
 }
 h1 {
-  font-size: 3.2em;
+  font-size: 2em;
   line-height: 1.1;
   color: #646cff;
-
+  max-width: 700px;
   padding: 0;
 }
 
@@ -55,10 +54,6 @@ button {
 button:hover {
   border-color: none;
 }
-/* button:focus,
-button:focus-visible {
-  outline: 1px auto #a9adfc;
-} */
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -70,5 +65,16 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+.header {
+  display: flex;
+  align-items: center;
+  padding: 30px 10px 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .header {
+    flex-direction: column;
   }
 }
