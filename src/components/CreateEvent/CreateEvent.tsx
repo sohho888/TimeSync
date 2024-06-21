@@ -22,9 +22,9 @@ function CreateEvent() {
 
     const timestamp = dateTime.valueOf();
     const timezone = moment.tz.guess();
-    const url = `${
-      window.location.href
-    } /?ts=${timestamp}&tz=${timezone}&event=${encodeURIComponent(eventName)}`;
+    const url = `${window.location.href}/?ts=${timestamp}&tz=${timezone}&event=${encodeURIComponent(
+      eventName,
+    )}`;
     setGeneratedUrl(url);
     setError('');
   };
