@@ -55,7 +55,7 @@ function PageEvent({ date, timezone, event }: PageEventProps) {
             </Modal>
           }
         >
-          <Clock time={date} tz={getCurrentTimezone()} />
+          <Clock time={date} tz={savedTimezone} />
         </Setevent>
       </div>
     </div>
